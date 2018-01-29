@@ -1,0 +1,29 @@
+body{
+  padding: 0px;
+  margin: 0px;
+}
+
+h1 {
+  font-size: 2em;
+  padding-top: 10px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+header {
+  height: 1080px;
+  width: 100%;
+  background-image: url("images/header.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  color:black;
+  padding-left: 10px;
+  
+}
+header p {
+  width: 95%;
+  text-align: left;
+  color: white;
+  font-size: 18px;
+}
+
+
