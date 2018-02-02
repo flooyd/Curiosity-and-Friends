@@ -68,6 +68,12 @@ p {
   display: none;
 }
 
+form {
+  text-align: center;
+  width: 90%;
+  margin: 60px auto;
+}
+
 @media only screen and (max-width: 500px) {
   header > a {
     position: static;
@@ -78,6 +84,9 @@ p {
   }
   .intro1 {
     margin-top:60px;
+  }
+  form {
+    margin-top: 90px;
   }
 }
 

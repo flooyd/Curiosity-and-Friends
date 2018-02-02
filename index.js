@@ -4,7 +4,7 @@ $(() => {
   handleBrowseClicked = () => {
     $('.begin-js').click(e => {
       toggleHide('.intro');
-      toggleHide('.favorite-js');
+      toggleHide('.content');
       bOnHomePage = false;
     });
   };
@@ -13,7 +13,7 @@ $(() => {
     $('h3 a').click(e => {
       if (!bOnHomePage) {
         toggleHide('.intro');
-        toggleHide('.favorite-js');
+        toggleHide('.content');
         bOnHomePage = true;
       }
     });
