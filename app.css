@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  
+  font-style: normal;
 }
 
 body{
@@ -69,17 +69,26 @@ p {
 }
 
 form {
-  background-color: lightgrey;
-  text-align: center;
-  width: 90%;
   margin: 60px auto;
+  text-align: center;
 }
 
 legend {
-  background-color: blue;
-  text-align: center;
+  display: block;
   width: 100%;
+  text-align: center;
 }
+
+fieldset {
+  width: 50%;
+  margin: 0 auto;
+}
+
+form div {
+  margin: 10px auto;
+}
+
+
 
 .container {
   border: 1px solid black;
