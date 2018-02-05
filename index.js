@@ -6,20 +6,22 @@ $(() => {
     img_src: 'images/curiosity.jpeg',
     cameras: [0, 1, 2, 3, 4, 5, 6],
     landing_date:	"2012-08-06",
-    launch_date:	"2011-11-26"
+    launch_date:	"2011-11-26",
+    status: 'Active'
   }, {
     rover: 'Opportunity',
     img_src: 'images/opportunity.jpg',
     cameras: [0, 1, 6, 7, 8],
     landing_date:	"2004-01-25",
-    launch_date:	"2003-07-07"
+    launch_date:	"2003-07-07",
+    status: 'Active'
   }, {
     rover: 'Spirit',
     img_src: 'images/spirit.jpg',
     cameras: [0, 1, 6, 7, 8],
     landing_date: "2004-01-04",
     launch_date: "2003-06-10",
-    status: "completed (R.I.P.)",
+    status: "Completed (R.I.P.)",
     max_date: '2010-03-21',
     total_photos: '124550'
   }];
@@ -74,16 +76,20 @@ $(() => {
   handleRoverChanged = () => {
     $('#rover').change(e => {
       let rover = rovers.find(r => r.rover === $(e.currentTarget).val());
-      console.log(rover);
       if($('#roverSummary').hasClass('hide')) {
         toggleHide($('#roverSummary'));
       }
-      
-      //need to find way to preload these images
-      $('#roverSrc').prop('src', '').prop('src', rover.img_src);
-      $('#roverName').html(rover.rover);
-      
+      populateRoverSummary(rover);
     })
+  }
+  
+  populateRoverSummary = rover => {
+    //need to find way to preload these images
+      $('#roverSrc').prop('src', rover.img_src);
+      $('#roverName').html(rover.rover);
+      $('#roverLaunch').html(`Launch Date: ${rover.launch_date}`);
+      $('#roverLand').html(`Landing Date: ${rover.landing_date}`);
+      $('#roverStatus').html(`Mission Status: ${rover.status}`)
   }
   //this is also functionality that won't be used now, but I will keep it here in case
   //maintainer of api updates it to allow for easier camera search
@@ -131,6 +137,7 @@ $(() => {
   handleHomeClicked();
   handleFormSubmit();
   handleRoverChanged();
+  populateRoverSummary(rovers.find(r => r.rover === 'Curiosity'));
   
   //for testing
   toggleHide('.intro');
