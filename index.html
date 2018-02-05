@@ -35,20 +35,14 @@
       <legend>Mars Photo Search</legend>
       <div>
         <label for="date">Earth Date</label>
-        <input name="date" id="date" type="date">
+        <input required name="date" id="date" type="date">
       </div>
       <div>
         <label for="rover">Rover</label>
         <select id="rover" name="rover">
-          <option>Curiosity</option>
-          <option>Opportunity</option>
-          <option>Spirit</option>
-        </select>
-      </div>
-      <div>
-        <label for="camera">Camera</label>
-        <select id="camera" name="camera">
-          <option>some camera</option>
+          <option value="Curiosity">Curiosity</option>
+          <option value="Opportunity">Opportunity</option>
+          <option value="Spirit">Spirit</option>
         </select>
       </div>
     </fieldset>
@@ -65,20 +59,12 @@
     </section>
 
     <section id="results-js" role="region" class="hide content">
-      <div class="row">
         <div class="col-3">
           <div class="container">
             <img class="marsImg" src="images/mars.jpg">
             <p>Hello </p>
           </div>
         </div>
-        <div class="col-3">
-          <div class="container">
-            <img class="marsImg" src="images/mars.jpg">
-            <p>Hello</p>
-          </div>
-        </div>
-      </div>
     </section>
   </main>
 

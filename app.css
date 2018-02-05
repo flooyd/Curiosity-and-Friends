@@ -90,8 +90,9 @@ form div {
 }
 
 .container {
-  border: 1px solid black;
-  width: 90%;
+  border: 1px solid brown;
+  width: 95%;
+  height: 100%;
   margin: 0 auto;
   text-align: center;
 }
@@ -104,6 +105,9 @@ form div {
 
 .marsImg {
   width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  padding: 5px;
 }
 
 .row {
@@ -129,17 +133,19 @@ form div {
   padding-left: 1.04166666%;
   padding-right: 1.04166666%;
   width: 100%;
+  height: 300px;
+  margin-top: 20px;
 }
 
 /* Non-mobile, grid */
 @media only screen and (min-width: 640px) {
   .col-3 {
-    width: 25%;
+    width: 25%;.
   }
 }
 
 /*header and content margin fixes for mobile*/
-@media only screen and (max-width: 640px) {
+@media only screen and (max-width: 500px) {
   header > a {
     position: static;
   }
@@ -154,9 +160,13 @@ form div {
   }
   
   form {
-    margin-top: 90px;
+    margin-top: 80px;
   }
   
+  
+}
+
+@media only screen and (max-width: 680px) {
   form div {
     display: block;
   }
