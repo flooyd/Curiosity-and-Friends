@@ -3,20 +3,30 @@ $(() => {
   let bOnHomePage = true;
   const rovers =[{
     rover: 'Curiosity',
-    cameras: [0, 1, 2, 3, 4, 5, 6]
+    img_src: 'images/curiosity.jpeg',
+    cameras: [0, 1, 2, 3, 4, 5, 6],
+    landing_date:	"2012-08-06",
+    launch_date:	"2011-11-26"
   }, {
     rover: 'Opportunity',
-    cameras: [0, 1, 6, 7, 8]
+    img_src: 'images/opportunity.jpg',
+    cameras: [0, 1, 6, 7, 8],
+    landing_date:	"2004-01-25",
+    launch_date:	"2003-07-07"
   }, {
     rover: 'Spirit',
+    img_src: 'images/spirit.jpg',
     cameras: [0, 1, 6, 7, 8],
     landing_date: "2004-01-04",
     launch_date: "2003-06-10",
-    status: "complete",
+    status: "completed (R.I.P.)",
     max_date: '2010-03-21',
     total_photos: '124550'
   }];
   
+  //due to the way the queries work, I won't be allowing user to select camera for now (too many api calls)
+  //but I submitted an issue on the maintainer's github repo so maybe I will update this later :D
+  //cameras in rover objects also won't be used, but I will keep it there for potential update later
   let cameras = [
     'FHAZ-Front Hazard Avoidance Camera',
     'RHAZ-Rear Hazard Avoidance Camera',
@@ -44,6 +54,7 @@ $(() => {
   }
   
   renderImages = images => {
+    toggleHide($('#roverSummary'));
     images.forEach(i => {
       $('#results-js').append(
         `<div class="col-3">
@@ -60,6 +71,22 @@ $(() => {
     
   }
   
+  handleRoverChanged = () => {
+    $('#rover').change(e => {
+      let rover = rovers.find(r => r.rover === $(e.currentTarget).val());
+      console.log(rover);
+      if($('#roverSummary').hasClass('hide')) {
+        toggleHide($('#roverSummary'));
+      }
+      
+      //need to find way to preload these images
+      $('#roverSrc').prop('src', '').prop('src', rover.img_src);
+      $('#roverName').html(rover.rover);
+      
+    })
+  }
+  //this is also functionality that won't be used now, but I will keep it here in case
+  //maintainer of api updates it to allow for easier camera search
   setCameraOptions = rover => {
     $('#camera').empty();
     rover = rovers.find(r => r.rover === rover);
@@ -103,6 +130,7 @@ $(() => {
   handleBrowseClicked();
   handleHomeClicked();
   handleFormSubmit();
+  handleRoverChanged();
   
   //for testing
   toggleHide('.intro');

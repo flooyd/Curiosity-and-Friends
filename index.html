@@ -32,9 +32,9 @@
 
   <form class="hide content">
     <fieldset>
-      <legend>Mars Photo Search</legend>
+      <legend><span class="mars">Mars</span> Photo Search</legend>
       <div>
-        <label for="date">Earth Date</label>
+        <label for="date"><span class="earth">Earth</span> Date</label>
         <input required name="date" id="date" type="date">
       </div>
       <div>
@@ -57,14 +57,15 @@
     <section role="region" class="intro intro2">
 
     </section>
-
+    <section id="roverSummary">
+      <img id="roverSrc" src="images/curiosity.jpeg">
+      <p id="roverName" class="rover">Curiosity</p>
+      <p id="roverLaunch"></p>
+      <p id="roverLand"></p>
+      <p id="roverStatus"></p>
+      <p id="roverTotalPhotos"></p>
+    </section>
     <section id="results-js" role="region" class="hide content">
-        <div class="col-3">
-          <div class="container">
-            <img class="marsImg" src="images/mars.jpg">
-            <p>Hello </p>
-          </div>
-        </div>
     </section>
   </main>
 
