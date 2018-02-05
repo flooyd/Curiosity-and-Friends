@@ -11,7 +11,7 @@ $(() => {
   };
 
   handleHomeClicked = () => {
-    $('h3 a').click(e => {
+    $('#brand').click(e => {
       if (!bOnHomePage) {
         toggleHide('.intro');
         toggleHide('.content');
@@ -19,6 +19,13 @@ $(() => {
       }
     });
   };
+  
+  handleFormSubmit = () => {
+    $('form').submit(e => {
+      e.preventDefault();
+      $('#results-js').empty();
+    })
+  }
 
   toggleHide = target => {
     $(target).toggleClass('hide');
@@ -26,4 +33,10 @@ $(() => {
 
   handleBrowseClicked();
   handleHomeClicked();
+  handleFormSubmit();
+  
+  //for testing
+  toggleHide('.intro');
+  toggleHide('.content');
+  bOnHomePage = false;
 })

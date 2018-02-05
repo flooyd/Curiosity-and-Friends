@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="description" content="A simple way to browse photos taken by Curiosity on Mars">
-  <title>Curiosity's Adventures</title>
+  <title>Curiosity and Friends</title>
   <link rel="stylesheet" type="text/css" href="reset.css">
   <link rel="stylesheet" type="text/css" href="app.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto|Space+Mono" rel="stylesheet">
@@ -17,16 +17,16 @@
 
 <body>
   <header>
-    <h3>
-      <a href="#">Curiosity's Adventures</a>
-    </h3>
+    <h2>
+      <a href="#" id="brand">Curiosity and Friends</a>
+    </h2>
     <a class="begin-js intro" href="#">Browse Photos</a>
     <a class="hide content" href="#">My Favorites</a>
   </header>
 
   <section role="region" class="intro intro1">
-    <h1>Curious about Curiosity?</h1>
-    <p>Curiosity's Adventures gives you an easy way to view all of the latest pictures from everyone's favorite little rover.</p>
+    <h1>Curious about Curiosity, Opportunity and Spirit?</h1>
+    <p>Curiosity and friends gives you an easy way to view all of the latest pictures from everyone's favorite little rovers.</p>
     <button class="begin-js">Browse Images</button>
   </section>
 
@@ -52,6 +52,7 @@
         </select>
       </div>
     </fieldset>
+    <button type="submit">Search</button>
   </form>
 
   <main role="main">
@@ -63,7 +64,7 @@
 
     </section>
 
-    <section role="region" class="hide content">
+    <section id="results-js" role="region" class="hide content">
       <div class="row">
         <div class="col-3">
           <div class="container">
