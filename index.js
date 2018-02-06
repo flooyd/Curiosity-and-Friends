@@ -69,8 +69,27 @@ $(() => {
     })
   }
   
-  getManifests = () => {
+  getManifest = rover => {
+    let lastManifestTime = localStorage.getItem('manifestTime');
     
+    if(lastManifestTime && Date.now() - lastManifestTime < 3600000) {
+      console.log('true');
+      setManifest(JSON.parse(localStorage.getItem(rover)));
+    } 
+    else {
+      let URI = encodeURI(`https://api.nasa.gov/mars-photos/api/v1/manifests/${rover}?api_key=Pe0cgsEjq6AGXZFT2GkmM4nzQAAgbRrB3c9qXke3`);
+      $.getJSON(URI, manifest => {
+      setManifest(manifest)
+      localStorage.setItem(rover, JSON.stringify(manifest));
+      localStorage.setItem('manifestTime', Date.now());
+    })
+    }
+    
+  }
+  
+  setManifest = (manifest, rover) => {
+    rover = rovers.find(r => r.rover === rover);
+    console.log(manifest);
   }
   
   handleRoverChanged = () => {
@@ -138,6 +157,8 @@ $(() => {
   handleFormSubmit();
   handleRoverChanged();
   populateRoverSummary(rovers.find(r => r.rover === 'Curiosity'));
+  getManifest('Curiosity');
+  getManifest('Opportunity');
   
   //for testing
   toggleHide('.intro');
