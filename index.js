@@ -5,17 +5,12 @@ $(() => {
     rover: 'Curiosity',
     img_src: 'images/curiosity.jpeg',
     cameras: [0, 1, 2, 3, 4, 5, 6],
-    landing_date:	"2012-08-06",
-    launch_date:	"2011-11-26",
-    status: 'Active'
   }, {
     rover: 'Opportunity',
     img_src: 'images/opportunity.jpg',
-    cameras: [0, 1, 6, 7, 8],
-    landing_date:	"2004-01-25",
-    launch_date:	"2003-07-07",
-    status: 'Active'
+    cameras: [0, 1, 6, 7, 8]
   }, {
+    //I don't query API for this because the Rover's mission is complete (stuck in soil on Mars!)
     rover: 'Spirit',
     img_src: 'images/spirit.jpg',
     cameras: [0, 1, 6, 7, 8],
@@ -47,7 +42,6 @@ $(() => {
   }
   
   getImages = URI => {
-    console.log(URI)
     $.getJSON(URI, data => {
       renderImages(data.photos);
     }).fail(() => {
@@ -56,7 +50,6 @@ $(() => {
   }
   
   renderImages = images => {
-    toggleHide($('#roverSummary'));
     images.forEach(i => {
       $('#results-js').append(
         `<div class="col-3">
@@ -67,29 +60,34 @@ $(() => {
         </div>`
         );
     })
+    $('form button').prop('disabled', false);
   }
   
   getManifest = rover => {
     let lastManifestTime = localStorage.getItem('manifestTime');
     
     if(lastManifestTime && Date.now() - lastManifestTime < 3600000) {
-      console.log('true');
-      setManifest(JSON.parse(localStorage.getItem(rover)));
+      setManifest(JSON.parse(localStorage.getItem(rover)), rover);
     } 
     else {
       let URI = encodeURI(`https://api.nasa.gov/mars-photos/api/v1/manifests/${rover}?api_key=Pe0cgsEjq6AGXZFT2GkmM4nzQAAgbRrB3c9qXke3`);
+      
       $.getJSON(URI, manifest => {
-      setManifest(manifest)
-      localStorage.setItem(rover, JSON.stringify(manifest));
-      localStorage.setItem('manifestTime', Date.now());
-    })
+        manifest = manifest.photo_manifest;
+        setManifest(manifest, rover)
+        localStorage.setItem(rover, JSON.stringify(manifest));
+        localStorage.setItem('manifestTime', Date.now());
+      })
     }
-    
   }
   
   setManifest = (manifest, rover) => {
     rover = rovers.find(r => r.rover === rover);
-    console.log(manifest);
+    rover.landing_date = manifest.landing_date;
+    rover.launch_date = manifest.launch_date;
+    rover.status = manifest.status;
+    rover.max_date = manifest.max_date;
+    rover.total_photos = manifest.total_photos;
   }
   
   handleRoverChanged = () => {
@@ -109,6 +107,8 @@ $(() => {
       $('#roverLaunch').html(`Launch Date: ${rover.launch_date}`);
       $('#roverLand').html(`Landing Date: ${rover.landing_date}`);
       $('#roverStatus').html(`Mission Status: ${rover.status}`)
+      $('#roverLastPhotoDate').html(`Latest Photos: ${rover.max_date}`);
+      $('#roverTotalPhotos').html(`Total Photos: ${rover.total_photos}`);
   }
   //this is also functionality that won't be used now, but I will keep it here in case
   //maintainer of api updates it to allow for easier camera search
@@ -126,6 +126,7 @@ $(() => {
       toggleHide('.intro');
       toggleHide('.content');
       bOnHomePage = false;
+      populateRoverSummary(rovers.find(r => r.rover === 'Curiosity'));
     });
   };
 
@@ -156,12 +157,12 @@ $(() => {
   handleHomeClicked();
   handleFormSubmit();
   handleRoverChanged();
-  populateRoverSummary(rovers.find(r => r.rover === 'Curiosity'));
   getManifest('Curiosity');
   getManifest('Opportunity');
   
+  
   //for testing
-  toggleHide('.intro');
-  toggleHide('.content');
-  bOnHomePage = false;
+  //toggleHide('.intro');
+  //toggleHide('.content');
+  //bOnHomePage = false;
 })

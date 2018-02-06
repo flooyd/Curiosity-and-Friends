@@ -168,6 +168,10 @@ form div {
   color: brown;
 }
 
+#results-js {
+  clear: left;
+}
+
 /* Non-mobile, grid */
 @media only screen and (min-width: 640px) {
   .col-3 {
