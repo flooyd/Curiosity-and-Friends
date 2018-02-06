@@ -3,7 +3,7 @@ $(() => {
   let bOnHomePage = true;
   const rovers =[{
     rover: 'Curiosity',
-    img_src: 'images/curiosity.jpeg',
+    img_src: 'images/curiosity.jpg',
     cameras: [0, 1, 2, 3, 4, 5, 6],
   }, {
     rover: 'Opportunity',
@@ -93,9 +93,7 @@ $(() => {
   handleRoverChanged = () => {
     $('#rover').change(e => {
       let rover = rovers.find(r => r.rover === $(e.currentTarget).val());
-      if($('#roverSummary').hasClass('hide')) {
-        toggleHide($('#roverSummary'));
-      }
+      $('#date').val(rover.max_date);
       populateRoverSummary(rover);
     })
   }
@@ -126,7 +124,9 @@ $(() => {
       toggleHide('.intro');
       toggleHide('.content');
       bOnHomePage = false;
-      populateRoverSummary(rovers.find(r => r.rover === 'Curiosity'));
+      let initialRover = rovers.find(r => r.rover === 'Curiosity');
+      $('#date').val(initialRover.max_date);
+      populateRoverSummary(initialRover);
     });
   };
 

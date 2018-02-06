@@ -69,6 +69,7 @@ intro1 p {
 
 form {
   margin: 60px auto;
+  margin-bottom: 30px;
   text-align: center;
 }
 
@@ -138,7 +139,7 @@ form div {
 }
 
 #roverSummary {
-  width: 90%;
+  width: 60%;
   margin: 0 auto;
   text-align: center;
   font-size: 16px;
@@ -146,7 +147,8 @@ form div {
 
 #roverSummary img {
   float: left;
-  width: 60%;
+  width: 50%;
+  max-width: 450px;
   margin-bottom: 10px;
 }
 
