@@ -100,15 +100,18 @@ form div {
 
 .container p {
   width: 100%;
-  color: blue;
-  padding: 0px 5px;
+  margin: 5px auto;
 }
 
 .marsImg {
   width: 100%;
   max-height: 200px;
-  object-fit: cover;
+  object-fit: contain;
   padding: 5px;
+}
+
+.imgContainer {
+  height: 200px;
 }
 
 .row {
@@ -172,6 +175,8 @@ form div {
 
 #results-js {
   clear: left;
+  overflow: auto;
+  margin-bottom: 50px;
 }
 
 /* Non-mobile, grid */

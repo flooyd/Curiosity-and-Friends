@@ -26,7 +26,7 @@
 
   <section role="region" class="intro intro1">
     <h1>Curious about Curiosity, Opportunity and Spirit?</h1>
-    <p>Curiosity and friends gives you an easy way to view all of the latest pictures from everyone's favorite little rovers.</p>
+    <p>Curiosity and friends gives you an easy way to view all of the latest pictures from everyone's favorite little rovers!</p>
     <button class="begin-js">Browse Images</button>
   </section>
 
@@ -67,6 +67,15 @@
       <p id="roverTotalPhotos"></p>
     </section>
     <section id="results-js" role="region" class="hide content">
+      <div class="col-3">
+        <div class="container">
+        <div class="imgContainer">
+        <img id=${i.id} class="marsImg" src="${i.img_src}">
+        </div>
+        <p>${i.camera.full_name}</p>
+        <p>Sol ${i.sol}</p>
+        </div>
+        </div> 
     </section>
   </main>
 

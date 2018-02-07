@@ -10,7 +10,7 @@ $(() => {
     img_src: 'images/opportunity.jpg',
     cameras: [0, 1, 6, 7, 8]
   }, {
-    //I don't query API for this because the Rover's mission is complete (stuck in soil on Mars!)
+    //I don't query API for this because the Rover's mission is complete. She's stuck in soil on Mars! :(
     rover: 'Spirit',
     img_src: 'images/spirit.jpg',
     cameras: [0, 1, 6, 7, 8],
@@ -43,21 +43,33 @@ $(() => {
   
   getImages = URI => {
     $.getJSON(URI, data => {
-      renderImages(data.photos);
+      if (data.photos.length < 1) {
+        //message for no photos for date
+        console.log('handle no photos');
+      } else {
+        renderImages(data.photos);
+      }
+      
     }).fail(() => {
-      console.log('fail');
+      //message for api limit exceeded
+      console.log('handle api limit exceeded - check rate in header');
     })
   }
   
+  //why is margin strange here
   renderImages = images => {
     images.forEach(i => {
       $('#results-js').append(
         `<div class="col-3">
         <div class="container">
-        <img class="marsImg" src="${i.img_src}">
-        <p>Hello </p>
+        <div class="imgContainer">
+        <img id=${i.id} class="marsImg" src="${i.img_src}">
         </div>
-        </div>`
+        <p>${i.camera.full_name}</p>
+        <p>Sol ${i.sol}</p>
+        <button>Hello</button>
+        </div>
+        </div> `
         );
     })
     $('form button').prop('disabled', false);
@@ -139,26 +151,42 @@ $(() => {
       }
     });
   };
+  
+  handleImgClicked = () => {
+    $('main').on('click', '.marsImg', e => {
+      let src = $(e.currentTarget).prop('src');
+      window.open(`${src}`, '_blank');
+    })
+  }
 
   handleFormSubmit = () => {
     $('form').submit(e => {
       e.preventDefault();
       $('#results-js').empty();
       $('form button').prop('disabled', true);
-      getImages(getURI());
+      selectedRover = rovers.find(r => r.rover === $('#rover').val());
+      console.log(selectedRover);
+      if($(date).val() > selectedRover.max_date) {
+        //message for date exceeded
+        console.log('date exceeded');
+      } else {
+        getImages(getURI());
+      }
+      
     })
   }
 
   toggleHide = target => {
     $(target).toggleClass('hide');
   }
-
+  
+  getManifest('Curiosity');
+  getManifest('Opportunity');
   handleBrowseClicked();
   handleHomeClicked();
   handleFormSubmit();
   handleRoverChanged();
-  getManifest('Curiosity');
-  getManifest('Opportunity');
+  handleImgClicked();
   
   
   //for testing
