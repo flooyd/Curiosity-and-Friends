@@ -73,6 +73,7 @@ $(() => {
         );
     })
     $('form button').prop('disabled', false);
+    toggleHide($('#roverSummary'), true);
   }
   
   getManifest = rover => {
@@ -120,6 +121,7 @@ $(() => {
       $('#roverLastPhotoDate').html(`Latest Photos: ${rover.max_date}`);
       $('#roverTotalPhotos').html(`Total Photos: ${rover.total_photos}`);
   }
+  
   //this is also functionality that won't be used now, but I will keep it here in case
   //maintainer of api updates it to allow for easier camera search
   setCameraOptions = rover => {
@@ -133,8 +135,8 @@ $(() => {
   
   handleBrowseClicked = () => {
     $('.begin-js').click(e => {
-      toggleHide('.intro');
-      toggleHide('.content');
+      toggleHide('.intro', true);
+      toggleHide('.content', false);
       bOnHomePage = false;
       let initialRover = rovers.find(r => r.rover === 'Curiosity');
       $('#date').val(initialRover.max_date);
@@ -145,8 +147,8 @@ $(() => {
   handleHomeClicked = () => {
     $('#brand').click(e => {
       if (!bOnHomePage) {
-        toggleHide('.intro');
-        toggleHide('.content');
+        toggleHide('.intro', false);
+        toggleHide('.content', true);
         bOnHomePage = true;
       }
     });
@@ -176,8 +178,13 @@ $(() => {
     })
   }
 
-  toggleHide = target => {
-    $(target).toggleClass('hide');
+  toggleHide = (target, hide) => {
+    if(hide) {
+      $(target).addClass('hide');
+    } else {
+      $(target).removeClass('hide');
+    }
+    
   }
   
   getManifest('Curiosity');
@@ -190,7 +197,7 @@ $(() => {
   
   
   //for testing
-  //toggleHide('.intro');
-  //toggleHide('.content');
-  //bOnHomePage = false;
+  toggleHide('.intro', true);
+  toggleHide('.content', false);
+  bOnHomePage = false;
 })
