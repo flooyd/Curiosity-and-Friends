@@ -56,7 +56,6 @@ $(() => {
     })
   }
   
-  //why is margin strange here
   renderImages = images => {
     images.forEach(i => {
       $('#results-js').append(
@@ -73,7 +72,6 @@ $(() => {
         );
     })
     $('form button').prop('disabled', false);
-    toggleHide($('#roverSummary'), true);
   }
   
   getManifest = rover => {
@@ -108,6 +106,7 @@ $(() => {
       let rover = rovers.find(r => r.rover === $(e.currentTarget).val());
       $('#date').val(rover.max_date);
       populateRoverSummary(rover);
+      toggleHide($('#roverSummary'), false);
     })
   }
   
@@ -120,6 +119,15 @@ $(() => {
       $('#roverStatus').html(`Mission Status: ${rover.status}`)
       $('#roverLastPhotoDate').html(`Latest Photos: ${rover.max_date}`);
       $('#roverTotalPhotos').html(`Total Photos: ${rover.total_photos}`);
+  }
+  
+  populateBrowse = () => {
+      toggleHide('.intro', true);
+      toggleHide('.content', false);
+      bOnHomePage = false;
+      let initialRover = rovers.find(r => r.rover === 'Curiosity');
+      $('#date').val(initialRover.max_date);
+      populateRoverSummary(initialRover);
   }
   
   //this is also functionality that won't be used now, but I will keep it here in case
@@ -135,12 +143,7 @@ $(() => {
   
   handleBrowseClicked = () => {
     $('.begin-js').click(e => {
-      toggleHide('.intro', true);
-      toggleHide('.content', false);
-      bOnHomePage = false;
-      let initialRover = rovers.find(r => r.rover === 'Curiosity');
-      $('#date').val(initialRover.max_date);
-      populateRoverSummary(initialRover);
+      populateBrowse();
     });
   };
 
@@ -160,6 +163,13 @@ $(() => {
       window.open(`${src}`, '_blank');
     })
   }
+  
+  handleImgHover = () => {
+    $('main').on('mouseenter', '.marsImg', e => {
+      let src = $(e.currentTarget).prop('src');
+      console.log(src);
+    })
+  }
 
   handleFormSubmit = () => {
     $('form').submit(e => {
@@ -167,11 +177,11 @@ $(() => {
       $('#results-js').empty();
       $('form button').prop('disabled', true);
       selectedRover = rovers.find(r => r.rover === $('#rover').val());
-      console.log(selectedRover);
       if($(date).val() > selectedRover.max_date) {
         //message for date exceeded
         console.log('date exceeded');
       } else {
+        toggleHide($('#roverSummary'), true);
         getImages(getURI());
       }
       
@@ -194,10 +204,12 @@ $(() => {
   handleFormSubmit();
   handleRoverChanged();
   handleImgClicked();
+  handleImgHover();
   
   
   //for testing
   toggleHide('.intro', true);
   toggleHide('.content', false);
   bOnHomePage = false;
+  populateBrowse();
 })
