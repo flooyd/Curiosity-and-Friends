@@ -1,5 +1,7 @@
 $(() => {
   
+  //temp storage for photos to be used to retrieve info if a photo is favorited
+  let photos = {};
   let bOnHomePage = true;
   const rovers =[{
     rover: 'Curiosity',
@@ -48,6 +50,8 @@ $(() => {
         console.log('handle no photos');
       } else {
         renderImages(data.photos);
+        photos =  data.photos;
+        console.log(photos);
       }
       
     }).fail(() => {
@@ -62,11 +66,11 @@ $(() => {
         `<div class="col-3">
         <div class="container">
         <div class="imgContainer">
-        <img id=${i.id} class="marsImg" src="${i.img_src}">
+        <img class="marsImg" src="${i.img_src}">
         </div>
         <p>${i.camera.full_name}</p>
         <p>Sol ${i.sol}</p>
-        <button>Hello</button>
+        <button id=${i.id}  class="favoriteButton">Favorite</button>
         </div>
         </div> `
         );
@@ -167,7 +171,15 @@ $(() => {
   handleImgHover = () => {
     $('main').on('mouseenter', '.marsImg', e => {
       let src = $(e.currentTarget).prop('src');
-      console.log(src);
+      //console.log(src);
+    })
+  }
+  
+  handlefavoriteClicked = () => {
+    $('main').on('click', '.favoriteButton', e => {
+      let id = $(e.currentTarget).prop('id');
+      let photo = photos.find(p => p.id == id);
+      console.log(photo);
     })
   }
 
@@ -205,6 +217,7 @@ $(() => {
   handleRoverChanged();
   handleImgClicked();
   handleImgHover();
+  handlefavoriteClicked();
   
   
   //for testing
