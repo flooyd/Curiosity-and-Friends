@@ -1,7 +1,7 @@
 $(() => {
   
   //temp storage for photos to be used to retrieve info if a photo is favorited
-  let photos = {};
+  let photos = [];
   let bOnHomePage = true;
   const rovers =[{
     rover: 'Curiosity',
@@ -46,21 +46,18 @@ $(() => {
   getImages = URI => {
     $.getJSON(URI, data => {
       if (data.photos.length < 1) {
-        //message for no photos for date
         console.log('handle no photos');
       } else {
-        renderImages(data.photos);
+        renderImages(data.photos, false);
         photos =  data.photos;
-        console.log(photos);
       }
       
     }).fail(() => {
-      //message for api limit exceeded
       console.log('handle api limit exceeded - check rate in header');
     })
   }
   
-  renderImages = images => {
+  renderImages = (images, bFavorites) => {
     images.forEach(i => {
       $('#results-js').append(
         `<div class="col-3">
@@ -70,7 +67,9 @@ $(() => {
         </div>
         <p>${i.camera.full_name}</p>
         <p>Sol ${i.sol}</p>
-        <button id=${i.id}  class="favoriteButton">Favorite</button>
+        <h1>Hello</h1>
+        <h1>Hello</h1>
+        <button id='PhotoID-${i.id}' class="favoriteButton">Favorite</button>
         </div>
         </div> `
         );
@@ -171,7 +170,6 @@ $(() => {
   handleImgHover = () => {
     $('main').on('mouseenter', '.marsImg', e => {
       let src = $(e.currentTarget).prop('src');
-      //console.log(src);
     })
   }
   
@@ -179,7 +177,6 @@ $(() => {
     $('main').on('click', '.favoriteButton', e => {
       let id = $(e.currentTarget).prop('id');
       let photo = photos.find(p => p.id == id);
-      console.log(photo);
     })
   }
 
@@ -205,8 +202,7 @@ $(() => {
       $(target).addClass('hide');
     } else {
       $(target).removeClass('hide');
-    }
-    
+    } 
   }
   
   getManifest('Curiosity');
