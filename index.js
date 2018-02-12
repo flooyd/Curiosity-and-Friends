@@ -43,21 +43,25 @@ $(() => {
     return `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${date}&api_key=Pe0cgsEjq6AGXZFT2GkmM4nzQAAgbRrB3c9qXke3`
   }
   
-  getImages = URI => {
+  getImages = (URI, rover) => {
     $.getJSON(URI, data => {
       if (data.photos.length < 1) {
-        console.log('handle no photos');
+        $('.error').html(`${rover} has no photos for that date. Maybe she was taking a nap? Try another date.`);
+        toggleHide($('.error'), false);
       } else {
+        toggleHide($('.error'), true);
         renderImages(data.photos, false);
         photos =  data.photos;
       }
-      
     }).fail(() => {
-      console.log('handle api limit exceeded - check rate in header');
+      $('.error').html('API issue - possible rate limit - check header of request');
+      toggleHide($('.error'), false);
+      $('form button').prop('disabled', false);
     })
   }
   
   renderImages = (images, bFavorites) => {
+    $('#results-js').empty();
     images.forEach(i => {
       $('#results-js').append(
         `<div class="col-3">
@@ -74,7 +78,6 @@ $(() => {
         </div> `
         );
     })
-    $('form button').prop('disabled', false);
   }
   
   getManifest = rover => {
@@ -109,6 +112,14 @@ $(() => {
       let rover = rovers.find(r => r.rover === $(e.currentTarget).val());
       $('#date').val(rover.max_date);
       populateRoverSummary(rover);
+      $('form button').prop('disabled', false);
+      toggleHide($('#roverSummary'), false);
+    })
+  }
+  
+  handleDateChanged = () => {
+    $('#date').change(e => {
+      $('form button').prop('disabled', false);
       toggleHide($('#roverSummary'), false);
     })
   }
@@ -186,12 +197,12 @@ $(() => {
       $('#results-js').empty();
       $('form button').prop('disabled', true);
       selectedRover = rovers.find(r => r.rover === $('#rover').val());
-      if($(date).val() > selectedRover.max_date) {
-        //message for date exceeded
-        console.log('date exceeded');
+      if($(date).val() > selectedRover.max_date || $(date).val() < selectedRover.landing_date) {
+        $('.error').html(`${selectedRover.rover} does not have photos for that date. She is not a time traveler. Change your date please.`);
+        toggleHide($('.error'), false);
       } else {
         toggleHide($('#roverSummary'), true);
-        getImages(getURI());
+        getImages(getURI(), selectedRover.rover);
       }
       
     })
@@ -211,6 +222,7 @@ $(() => {
   handleHomeClicked();
   handleFormSubmit();
   handleRoverChanged();
+  handleDateChanged();
   handleImgClicked();
   handleImgHover();
   handlefavoriteClicked();
