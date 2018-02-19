@@ -93,7 +93,7 @@ form div {
 .container {
   border: 1px solid brown;
   width: 95%;
-  height: 100%;
+  height: 300px;
   margin: 0 auto;
   text-align: center;
 }
@@ -177,6 +177,15 @@ form div {
   clear: left;
   overflow: auto;
   margin-bottom: 50px;
+}
+
+.favoriteButton {
+  border: 1px solid brown;
+  background-color: white;
+  font-size: 15px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  
 }
 
 /* Non-mobile, grid */
