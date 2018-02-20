@@ -83,19 +83,6 @@ $(() => {
     }
   }
   
-  //button will show that the photo is favorited (if hovered over). need more styling in future
-  markFavorites = () => {
-    let favorites = JSON.parse(localStorage.getItem('favorites'));
-    $('.container button').each((i, button) => {
-      let photoID = $(button).prop('id').split('-')[1];
-      favorites.forEach(f => {
-        if(f.id == photoID) {
-          $(button).text('Remove Favorite');
-        }
-      })
-    })
-  }
-  
   getManifest = rover => {
     let lastManifestTime = localStorage.getItem('manifestTime');
     
@@ -186,6 +173,27 @@ $(() => {
     
   }
   
+  removeFavorite = photoID => {
+    let a = [1, 2, 3];
+    let x = a.filter(i => {
+      return i !== 2;
+    })
+    console.log(x);
+  }
+  
+  //button will show that the photo is favorited (if hovered over). need more styling in future
+  markFavorites = () => {
+    let favorites = JSON.parse(localStorage.getItem('favorites'));
+    $('.container button').each((i, button) => {
+      let photoID = $(button).prop('id').split('-')[1];
+      favorites.forEach(f => {
+        if(f.id == photoID) {
+          $(button).text('Remove Favorite');
+        }
+      })
+    })
+  }
+  
   handleBrowseClicked = () => {
     $('.begin-js').click(e => {
       populateBrowse();
@@ -232,7 +240,7 @@ $(() => {
         $(e.currentTarget).text('Remove Favorite');
         saveFavorite(photoID);
       } else {
-        console.log('hi');
+        removeFavorite(1)
       }
       
     })
