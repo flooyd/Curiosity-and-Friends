@@ -71,9 +71,7 @@ $(() => {
         </div>
         <p>${i.camera.full_name}</p>
         <p>Sol ${i.sol}</p>
-        <h1>Hello</h1>
-        <h1>Hello</h1>
-        <button id='PhotoID-${i.id}' class="favoriteButton">Favorite</button>
+        <button id='PhotoID-${i.id}' class="favoriteButton hide">Favorite</button>
         </div>
         </div> `
         );
@@ -178,9 +176,17 @@ $(() => {
     })
   }
   
-  handleImgHover = () => {
-    $('main').on('mouseenter', '.marsImg', e => {
-      let src = $(e.currentTarget).prop('src');
+  handleContainerHover = () => {
+    $('main').on('mouseenter', '.container', e => {
+      let favoriteButton = $(e.currentTarget).find('button');
+      toggleHide(favoriteButton, false);
+    })
+  }
+
+  handleContainerLeave = () => {
+    $('main').on('mouseleave', '.container', e => {
+      let favoriteButton = $(e.currentTarget).find('button');
+      toggleHide(favoriteButton, true);
     })
   }
   
@@ -224,7 +230,8 @@ $(() => {
   handleRoverChanged();
   handleDateChanged();
   handleImgClicked();
-  handleImgHover();
+  handleContainerHover();
+  handleContainerLeave();
   handlefavoriteClicked();
   
   
