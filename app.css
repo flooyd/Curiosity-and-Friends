@@ -190,7 +190,11 @@ form div {
   font-size: 15px;
   margin-top: 5px;
   margin-bottom: 5px;
-  
+}
+
+.favoriteButton:hover {
+  border: 1px solid black;
+  cursor: pointer;
 }
 
 /* Non-mobile, grid */

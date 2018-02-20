@@ -52,6 +52,7 @@ $(() => {
         toggleHide($('.error'), true);
         renderImages(data.photos, false);
         photos =  data.photos;
+        markFavorites();
       }
     }).fail(() => {
       $('.error').html('API issue - possible rate limit - check header of request');
@@ -62,7 +63,10 @@ $(() => {
   
   renderImages = (images, bFavorites) => {
     $('#results-js').empty();
-    images.forEach(i => {
+    if(bFavorites) {
+      
+    } else {
+      images.forEach(i => {
       $('#results-js').append(
         `<div class="col-3">
         <div class="container">
@@ -75,6 +79,20 @@ $(() => {
         </div>
         </div> `
         );
+    })
+    }
+  }
+  
+  //button will show that the photo is favorited (if hovered over). need more styling in future
+  markFavorites = () => {
+    let favorites = JSON.parse(localStorage.getItem('favorites'));
+    $('.container button').each((i, button) => {
+      let photoID = $(button).prop('id').split('-')[1];
+      favorites.forEach(f => {
+        if(f.id == photoID) {
+          $(button).text('Remove Favorite');
+        }
+      })
     })
   }
   
@@ -153,6 +171,21 @@ $(() => {
     })
   }
   
+  saveFavorite = photoID => {
+    let photo = photos.find(p => p.id == photoID);
+    let favorites = JSON.parse(localStorage.getItem('favorites'));
+    
+    //first favorite - make array
+    if (!favorites) {
+      favorites = [];
+    }
+    
+    favorites.push(photo);
+    console.log(favorites);
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+    
+  }
+  
   handleBrowseClicked = () => {
     $('.begin-js').click(e => {
       populateBrowse();
@@ -190,10 +223,18 @@ $(() => {
     })
   }
   
-  handlefavoriteClicked = () => {
+  handleFavoriteClicked = () => {
     $('main').on('click', '.favoriteButton', e => {
-      let id = $(e.currentTarget).prop('id');
-      let photo = photos.find(p => p.id == id);
+      let photoID = $(e.currentTarget).prop('id').split('-')[1];
+      let favText = $(e.currentTarget).text();
+      if (favText === 'Favorite')
+      {
+        $(e.currentTarget).text('Remove Favorite');
+        saveFavorite(photoID);
+      } else {
+        console.log('hi');
+      }
+      
     })
   }
 
@@ -232,7 +273,7 @@ $(() => {
   handleImgClicked();
   handleContainerHover();
   handleContainerLeave();
-  handlefavoriteClicked();
+  handleFavoriteClicked();
   
   
   //for testing
