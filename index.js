@@ -174,11 +174,15 @@ $(() => {
   }
   
   removeFavorite = photoID => {
-    let a = [1, 2, 3];
-    let x = a.filter(i => {
-      return i !== 2;
+    let favorites = JSON.parse(localStorage.getItem('favorites'));
+    let newFavorites = favorites.filter(f => {
+      console.log(typeof f.id);
+      console.log(typeof photoID);
+      return f.id != photoID;
     })
-    console.log(x);
+    console.log(newFavorites);
+    localStorage.setItem('favorites', JSON.stringify(newFavorites));
+    
   }
   
   //button will show that the photo is favorited (if hovered over). need more styling in future
@@ -240,7 +244,8 @@ $(() => {
         $(e.currentTarget).text('Remove Favorite');
         saveFavorite(photoID);
       } else {
-        removeFavorite(1)
+        removeFavorite(photoID);
+        $(e.currentTarget).text('Favorite');
       }
       
     })
