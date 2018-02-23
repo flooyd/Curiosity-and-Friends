@@ -42,7 +42,11 @@ header>a {
 
 .intro1{
   margin-top: 30px;
-  
+}
+
+.intro a {
+  text-decoration: none;
+  color: brown;
 }
 
 .intro1, .intro3, .intro5{
