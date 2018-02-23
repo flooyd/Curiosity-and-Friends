@@ -3,7 +3,7 @@
   font-style: normal;
 }
 
-body{
+body {
   font-family: 'Space Mono', cursive;
   padding: 0px;
   margin: 0px;
@@ -28,7 +28,7 @@ h2 a {
   font-size: 18px;
 }
 
-header > a {
+header>a {
   position: absolute;
   color: brown;
   top: 0px;
@@ -37,30 +37,46 @@ header > a {
 }
 
 .intro {
-  margin-left: 20px;
-  margin-right: 20px;
+  text-align: center;
 }
 
-.intro1 {
+.intro1{
   margin-top: 30px;
-}
-
-.intro1 p {
-  width: 50%;
-}
-
-.intro1 img {
   
-  width: 50%;
 }
 
+.intro1, .intro3, .intro5{
+  color: white;
+  background-color: brown;
+}
 
+.intro p {
+  margin-top: 25px;
+  color: whitesmoke;
+  
+}
+
+.intro img {
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.intro2, .intro4 {
+  background-color: white;
+}
+
+.intro2 p, .intro4 p {
+  color: black;
+}
+
+.intro3 img, .intro4 img, .intro5 img {
+  max-width: 450px;
+  max-height: 450px;
+}
 
 h1 {
-  font-size: 2em;
-  text-align: left;
+  font-size: 2em; 
 }
-
 
 .hide {
   display: none;
@@ -86,7 +102,6 @@ form button {
 
 form div {
   display: inline;
-  
 }
 
 .container {
@@ -115,13 +130,11 @@ form div {
 }
 
 .row {
-  max-width: 1000px;
-  padding-left: 20px;
-  padding-right: 20px;
   margin: 0 auto;
 }
 
 /* Clearfix */
+
 .row::before,
 .row::after {
   display: table;
@@ -132,12 +145,11 @@ form div {
   clear: both;
 }
 
-.col-3 {
+.col-3, .col-6 {
   float: left;
   padding-left: 1.04166666%;
   padding-right: 1.04166666%;
   width: 100%;
-  
   margin-top: 20px;
 }
 
@@ -202,44 +214,40 @@ form div {
 }
 
 /* Non-mobile, grid */
+
 @media only screen and (min-width: 640px) {
   .col-3 {
     width: 25%;
   }
+
+  .col-6 {
+    width: 50%;
+  }
 }
 
 /*header and content margin fixes for mobile*/
+
 @media only screen and (max-width: 500px) {
-  header > a {
+  header>a {
     position: static;
   }
-  
   header {
     text-align: center;
     height: 60px;
   }
-  
   .intro1 {
-    margin-top:60px;
+    margin-top: 60px;
   }
-  
   form {
     margin-top: 80px;
   }
-  
-  
 }
 
 @media only screen and (max-width: 680px) {
   form div {
     display: block;
   }
-  
   #roverSummary img {
-  
-  width: 100%;
+    width: 100%;
+  }
 }
-
-}
-
-
