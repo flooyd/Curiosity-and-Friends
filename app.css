@@ -51,7 +51,7 @@ header>a {
 }
 
 .intro p {
-  margin-top: 25px;
+  margin: 25px 0px 15px 0px;
   color: whitesmoke;
   
 }
@@ -69,6 +69,10 @@ header>a {
   color: black;
 }
 
+.intro2 img {
+  max-width: 320px;
+  max-height: 350px;
+}
 .intro3 img, .intro4 img, .intro5 img {
   max-width: 450px;
   max-height: 450px;
@@ -130,6 +134,7 @@ form div {
 }
 
 .row {
+  background-color:
   margin: 0 auto;
 }
 
