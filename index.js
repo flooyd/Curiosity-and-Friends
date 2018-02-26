@@ -70,7 +70,7 @@ $(() => {
           `<div class="col-3">
           <div class="container">
           <div class="imgContainer">
-          <img class="marsImg" src="${i.img_src}">
+          <img class="marsImg" src="${i.img_src}" alt="A photo of Mars from ${i.rover.name}'s ${i.camera.full_name}">
           </div>
           <p>${i.rover.name}</p>
           <p>Sol ${i.sol}</p>
@@ -87,7 +87,7 @@ $(() => {
           `<div class="col-3">
         <div class="container">
         <div class="imgContainer">
-        <img class="marsImg" src="${i.img_src}">
+        <img class="marsImg" src="${i.img_src}" alt="A photo of Mars from ${i.rover.name}'s ${i.camera.full_name}">
         </div>
         <p>Sol ${i.sol}</p>
         <p>${i.camera.full_name}</p>
@@ -144,6 +144,7 @@ $(() => {
 
   populateRoverSummary = rover => {
     //need to find way to preload these images
+    $('#roverSrc').prop('alt', `A photo of ${rover.rover}`)
     $('#roverSrc').prop('src', rover.img_src);
     $('#roverName').html(rover.rover);
     $('#roverLaunch').html(`Launch Date: ${rover.launch_date}`);
