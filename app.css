@@ -2,11 +2,16 @@
   box-sizing: border-box;
   font-style: normal;
 }
-
+html {
+  height: 100%;
+}
 body {
+  position: relative;
   font-family: 'Space Mono', cursive;
   padding: 0px;
   margin: 0px;
+  min-height: 100%;
+  padding-bottom: 5rem;
 }
 
 header {
@@ -16,6 +21,10 @@ header {
   height: 30px;
   top: 0px;
   line-height: 30px;
+}
+
+h1 {
+  font-size: 2em;
 }
 
 h2 {
@@ -40,7 +49,7 @@ header>a {
   text-align: center;
 }
 
-.intro1{
+.intro1 {
   margin-top: 30px;
 }
 
@@ -49,7 +58,9 @@ header>a {
   color: brown;
 }
 
-.intro1, .intro3, .intro5{
+.intro1,
+.intro3,
+.intro5 {
   color: white;
   background-color: brown;
 }
@@ -57,7 +68,6 @@ header>a {
 .intro p {
   margin: 25px 0px 15px 0px;
   color: whitesmoke;
-  
 }
 
 .intro img {
@@ -65,11 +75,13 @@ header>a {
   margin-bottom: 25px;
 }
 
-.intro2, .intro4 {
+.intro2,
+.intro4 {
   background-color: white;
 }
 
-.intro2 p, .intro4 p {
+.intro2 p,
+.intro4 p {
   color: black;
 }
 
@@ -77,13 +89,40 @@ header>a {
   max-width: 320px;
   max-height: 350px;
 }
-.intro3 img, .intro4 img, .intro5 img {
+
+.intro3 img,
+.intro4 img,
+.intro5 img {
   max-width: 450px;
   max-height: 450px;
 }
 
-h1 {
-  font-size: 2em; 
+footer {
+  background-color:whitesmoke;
+  color: black;
+  text-align: center;
+  position: absolute;
+  height: 6rem;
+  bottom: 0px;
+  width: 100%;
+  font-size: 16px;
+  padding: 10px;
+}
+
+footer a {
+  color: brown;
+}
+
+.madeWith {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  display: inline-block;
+}
+
+footer img {
+  display: inline;
+  height: 32px;
+  width: 32px;
 }
 
 .hide {
@@ -138,8 +177,7 @@ form div {
 }
 
 .row {
-  background-color:
-  margin: 0 auto;
+  background-color: margin: 0 auto;
 }
 
 /* Clearfix */
@@ -154,7 +192,8 @@ form div {
   clear: both;
 }
 
-.col-3, .col-6 {
+.col-3,
+.col-6 {
   float: left;
   padding-left: 1.04166666%;
   padding-right: 1.04166666%;
@@ -228,7 +267,6 @@ form div {
   .col-3 {
     width: 25%;
   }
-
   .col-6 {
     width: 50%;
   }
